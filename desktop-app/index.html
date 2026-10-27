@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';">
+<title>Veil Browser</title>
+<style>
+:root{color-scheme:dark;--bg:#101411;--panel:#171d19;--panel2:#202923;--line:#2b372e;--text:#e8f0e9;--muted:#98a69a;--green:#a8e6a1;--green2:#233d2b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;height:100vh;display:flex;flex-direction:column}
+#tabs{height:48px;display:flex;align-items:end;gap:6px;padding:8px 12px 0;background:#0c100d;border-bottom:1px solid var(--line);overflow-x:auto}
+.tab{height:39px;min-width:130px;max-width:220px;padding:0 13px;display:flex;align-items:center;gap:9px;border:1px solid transparent;border-radius:10px 10px 0 0;color:var(--muted);cursor:pointer;white-space:nowrap;overflow:hidden}
+.tab.active{background:var(--panel);border-color:var(--line);border-bottom-color:var(--panel);color:var(--text)}
+.tab span{overflow:hidden;text-overflow:ellipsis;flex:1}.close{border:0;background:transparent;color:var(--muted);font-size:17px;cursor:pointer}
+#newtab{height:32px;width:34px;border:0;background:transparent;color:var(--muted);font-size:22px;cursor:pointer}
+#toolbar{display:flex;gap:8px;align-items:center;padding:11px 14px;background:var(--panel);border-bottom:1px solid var(--line)}
+button{font:inherit} .nav{height:35px;min-width:36px;border:1px solid var(--line);border-radius:9px;background:var(--panel2);color:var(--text);cursor:pointer}.nav:disabled{opacity:.35;cursor:default}
+#addressWrap{flex:1;display:flex;align-items:center;background:#0f1511;border:1px solid var(--line);border-radius:11px;padding:0 12px;height:39px;gap:9px}
+#lock{color:var(--green)}#address{width:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:14px}
+#go{height:35px;border:0;border-radius:9px;background:var(--green);color:#142217;font-weight:700;padding:0 17px;cursor:pointer}
+#status{height:24px;padding:4px 16px;color:var(--muted);font-size:11px;background:var(--panel)}
+#views{position:relative;flex:1;min-height:0;background:#fff}webview{position:absolute;inset:0;width:100%;height:100%;display:none;background:#fff}webview.active{display:flex}
+#welcome{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 35%,#1d3023,#101411 65%);color:var(--text);text-align:center}
+.welcome-inner{width:min(680px,90%)}.logo{font-size:48px;letter-spacing:-2px;font-weight:750;margin-bottom:8px}.logo em{font-style:normal;color:var(--green)}.subtitle{color:var(--muted);margin-bottom:32px}
+#homeSearch{display:flex;gap:8px;background:#161e18;border:1px solid #344638;border-radius:15px;padding:8px;box-shadow:0 18px 65px #0005}#homeInput{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--text);padding:0 12px;font-size:16px}
+.quick{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:22px}.quick button{border:1px solid var(--line);background:#172019;color:var(--muted);border-radius:10px;padding:10px 13px;cursor:pointer}.hint{margin-top:34px;font-size:12px;color:#7f8b81}
+</style>
+</head>
+<body>
+<div id="tabs"></div>
+<div id="toolbar">
+  <button class="nav" id="back" title="Back" disabled>←</button>
+  <button class="nav" id="forward" title="Forward" disabled>→</button>
+  <button class="nav" id="reload" title="Reload">↻</button>
+  <button class="nav" id="home" title="Home">⌂</button>
+  <div id="addressWrap"><span id="lock">◈</span><input id="address" autocomplete="off" spellcheck="false" placeholder="Search or enter website address"><button class="nav" id="go" title="Go">Go</button></div>
+</div>
+<div id="status">Veil Browser · Standalone desktop app</div>
+<div id="views">
+  <div id="welcome"><div class="welcome-inner"><div class="logo">veil<em>.</em></div><div class="subtitle">A quieter window to the web.</div><form id="homeSearch"><input id="homeInput" placeholder="Search the web or enter an address" autocomplete="off"><button id="go" type="submit">Search</button></form><div class="quick"><button data-url="https://wikipedia.org">Wikipedia</button><button data-url="https://github.com">GitHub</button><button data-url="https://archive.org">Internet Archive</button></div><div class="hint">Enter a website address, or type a search query. Network and school filters still apply.</div></div></div>
+</div>
+<script>
+const tabsEl=document.getElementById('tabs'),views=document.getElementById('views'),address=document.getElementById('address'),statusEl=document.getElementById('status');
+let tabs=[],activeId=null,nextId=1;
+function normalize(input){let v=input.trim();if(!v)return 'https://duckduckgo.com/';if(/^https?:\/\//i.test(v))return v;if(/^[\w-]+(\.[\w-]+)+(\/.*)?$/.test(v)&&!v.includes(' '))return 'https://'+v;return 'https://duckduckgo.com/?q='+encodeURIComponent(v)}
+function active(){return tabs.find(t=>t.id===activeId)}
+function makeTab(url=''){const id=nextId++;const view=document.createElement('webview');view.setAttribute('partition','persist:veil');view.setAttribute('allowpopups','false');view.setAttribute('webpreferences','contextIsolation=yes,nodeIntegration=no,sandbox=yes');view.className='';view.addEventListener('did-start-loading',()=>{if(activeId===id)statusEl.textContent='Loading…'});view.addEventListener('did-stop-loading',()=>{if(activeId===id){statusEl.textContent=view.getURL()||'Ready';syncNav();}});view.addEventListener('page-title-updated',e=>{const t=tabs.find(x=>x.id===id);if(t){t.title=e.title||'New tab';renderTabs()}});view.addEventListener('did-navigate',()=>{if(activeId===id){address.value=view.getURL();syncNav()}});view.addEventListener('did-navigate-in-page',()=>{if(activeId===id)address.value=view.getURL()});view.addEventListener('did-fail-load',e=>{if(activeId===id&&e.errorCode!==-3)statusEl.textContent='Page failed to load. The site or network may be blocking access.'});views.appendChild(view);const t={id,view,title:'New tab',url};tabs.push(t);switchTab(id);if(url)navigate(url);return t}
+function renderTabs(){tabsEl.innerHTML='';tabs.forEach(t=>{const el=document.createElement('div');el.className='tab'+(t.id===activeId?' active':'');el.innerHTML='<span></span><button class="close" title="Close tab">×</button>';el.firstChild.textContent=t.title;el.addEventListener('click',()=>switchTab(t.id));el.querySelector('button').addEventListener('click',e=>{e.stopPropagation();closeTab(t.id)});tabsEl.appendChild(el)});const plus=document.createElement('button');plus.id='newtab';plus.textContent='+';plus.title='New tab';plus.onclick=()=>makeTab();tabsEl.appendChild(plus)}
+function switchTab(id){activeId=id;tabs.forEach(t=>t.view.classList.toggle('active',t.id===id));const t=active();document.getElementById('welcome').style.display=t&&t.url?'none':'flex';address.value=t?.url||'';renderTabs();syncNav();statusEl.textContent=t?.url||'New tab'}
+function closeTab(id){const i=tabs.findIndex(t=>t.id===id);if(i<0)return;tabs[i].view.remove();tabs.splice(i,1);if(!tabs.length){makeTab();return}if(activeId===id)switchTab(tabs[Math.max(0,i-1)].id);else renderTabs()}
+function navigate(raw){const t=active();if(!t)return;const url=normalize(raw);t.url=url;t.title='Loading…';document.getElementById('welcome').style.display='none';t.view.loadURL(url);address.value=url;renderTabs()}
+function syncNav(){const v=active()?.view;document.getElementById('back').disabled=!v||!v.canGoBack();document.getElementById('forward').disabled=!v||!v.canGoForward()}
+document.getElementById('go').addEventListener('click',()=>navigate(address.value));
+address.addEventListener('keydown',e=>{if(e.key==='Enter')navigate(address.value)});
+document.getElementById('back').onclick=()=>{const v=active()?.view;if(v?.canGoBack())v.goBack()};
+document.getElementById('forward').onclick=()=>{const v=active()?.view;if(v?.canGoForward())v.goForward()};
+document.getElementById('reload').onclick=()=>{const v=active()?.view;if(v?.getURL())v.reload()};
+document.getElementById('home').onclick=()=>{const t=active();if(t){t.url='';t.title='New tab';t.view.src='about:blank';document.getElementById('welcome').style.display='flex';address.value='';renderTabs()}};
+document.getElementById('homeSearch').addEventListener('submit',e=>{e.preventDefault();navigate(document.getElementById('homeInput').value)});
+document.querySelectorAll('[data-url]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.url)));
+makeTab();
+</script>
+</body>
+</html>
