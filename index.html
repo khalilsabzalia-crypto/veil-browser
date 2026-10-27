@@ -13,6 +13,7 @@ a{color:inherit}.topbar{height:72px;max-width:1120px;margin:auto;padding:0 26px;
 main{width:min(800px,calc(100% - 36px));margin:0 auto}.hero{text-align:center;padding:clamp(72px,13vh,135px) 0 36px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.22em;color:var(--accent);font-weight:750}.hero h1{font-size:clamp(48px,9vw,82px);letter-spacing:-.075em;line-height:1.02;margin:17px 0 18px;font-weight:760}.hero h1 span{color:var(--accent)}.hero p{color:var(--muted);font-size:16px;margin:0 auto;max-width:470px}
 .search-wrap{margin:0 auto;max-width:740px}.searchbox{display:flex;align-items:center;gap:12px;padding:9px 10px 9px 18px;border:1px solid #333d4c;border-radius:18px;background:#11151deF;box-shadow:0 20px 70px #0005,inset 0 1px #ffffff08;transition:border-color .2s,box-shadow .2s}.searchbox:focus-within{border-color:#a7d693;box-shadow:0 0 0 4px #b6f09c14,0 20px 70px #0005}.search-icon{color:#94a18f;font-size:22px;flex-shrink:0}.searchbox input{min-width:0;flex:1;background:transparent;border:0;outline:0;color:var(--text);font:inherit;font-size:16px;padding:12px 0}.searchbox input::placeholder{color:#687486}.searchbox button{border:0;border-radius:12px;background:var(--accent);color:#10170d;font:inherit;font-weight:800;padding:12px 20px;cursor:pointer;transition:transform .15s,background .15s}.searchbox button:hover{background:var(--accent2);transform:translateY(-1px)}button:disabled{opacity:.6;cursor:wait;transform:none!important}.shortcuts{display:flex;justify-content:center;align-items:center;gap:9px;flex-wrap:wrap;margin:18px 0 0;color:var(--muted);font-size:12px}.chip{border:1px solid var(--line);background:#121721aa;color:#aab4c3;border-radius:99px;padding:6px 12px;font:inherit;cursor:pointer}.chip:hover{border-color:#53634f;color:var(--accent)}
 .results{margin:48px auto 0;max-width:740px}.results-head{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding:0 2px 14px;margin-bottom:8px}.results-head h2{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:#aab4c3;margin:0}.result-count{font-size:12px;color:var(--muted)}.result{padding:20px 4px 22px;border-bottom:1px solid #1c222d}.result-url{font-size:12px;color:#9abf8b;overflow-wrap:anywhere;margin-bottom:7px}.result h3{margin:0 0 7px;font-size:20px;line-height:1.3;letter-spacing:-.025em;font-weight:650}.result h3 a{text-decoration:none}.result h3 a:hover{color:var(--accent)}.result p{margin:0;color:#a9b2c0;line-height:1.65;font-size:14px;overflow-wrap:anywhere}.empty{border:1px dashed #303847;border-radius:16px;padding:28px;text-align:center;color:var(--muted);margin-top:18px}.empty strong{display:block;color:var(--text);font-size:16px;margin-bottom:5px}.hidden{display:none!important}.loading{display:flex;align-items:center;justify-content:center;gap:10px;padding:30px;color:var(--muted)}.spinner{width:16px;height:16px;border:2px solid #394434;border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.below{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:74px 0 60px}.feature{border:1px solid var(--line);border-radius:15px;background:#11151b99;padding:18px}.feature-icon{font-size:18px;color:var(--accent)}.feature h3{font-size:13px;margin:11px 0 5px}.feature p{font-size:12px;color:var(--muted);margin:0;line-height:1.6}footer{border-top:1px solid #202631;color:#697587;font-size:11px;display:flex;justify-content:space-between;gap:12px;padding:22px 26px;max-width:1120px;margin:auto}footer a{color:#9ba6b6;text-decoration:none}footer a:hover{color:var(--accent)}.notice{font-size:12px;color:#657184;text-align:center;margin-top:14px}.notice a{color:#96a68e}
+.viewer{margin:28px auto 0;max-width:1000px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#0e1219}.viewer-bar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#151a23;border-bottom:1px solid var(--line)}.viewer-bar button{border:1px solid #333d4c;background:#202733;color:var(--text);padding:8px 12px;border-radius:9px;cursor:pointer}.viewer-address{min-width:0;flex:1;color:#aab4c3;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.viewer iframe{display:block;width:100%;height:min(72vh,760px);border:0;background:white}.viewer-note{padding:10px 14px;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
 @media(max-width:560px){.topbar{height:62px;padding:0 18px}.status{font-size:0}.status .dot{font-size:initial}.hero{padding-top:72px}.hero p{font-size:14px}.searchbox{padding:7px 7px 7px 13px;border-radius:15px;gap:8px}.searchbox input{font-size:14px}.searchbox button{padding:11px 13px}.below{grid-template-columns:1fr;margin-top:48px}.feature{display:flex;gap:14px;align-items:flex-start;padding:15px}.feature-icon{margin-top:2px}.feature h3{margin:0 0 4px}footer{padding:18px;flex-direction:column;align-items:center;text-align:center}.results{margin-top:36px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
@@ -21,11 +22,16 @@ main{width:min(800px,calc(100% - 36px));margin:0 auto}.hero{text-align:center;pa
 <header class="topbar"><a class="brand" href="./" aria-label="Veil home"><span class="logo">V</span><span>veil<span style="color:var(--accent)">.</span></span></a><div class="status"><span class="dot"></span> Independent search · Beta</div></header>
 <main>
 <section class="hero"><div class="eyebrow">A little less noise</div><h1>Search beyond<br>the <span>obvious.</span></h1><p>A calmer corner of the web. Find useful pages, independent sites, and ideas worth exploring.</p></section>
-<section class="search-wrap" aria-label="Search the web"><form id="searchForm" class="searchbox"><span class="search-icon" aria-hidden="true">⌕</span><input id="query" name="q" type="search" placeholder="What are you looking for?" autocomplete="off" maxlength="300" aria-label="Search query" required><button id="searchButton" type="submit">Search ↗</button></form><div class="shortcuts"><span>Try:</span><button class="chip" type="button" data-query="how the internet works">how the internet works</button><button class="chip" type="button" data-query="independent websites">independent websites</button><button class="chip" type="button" data-query="open source projects">open source projects</button></div><p class="notice">Search the web with Veil, with backup links if a provider is unavailable.</p></section>
+<section class="search-wrap" aria-label="Search the web"><form id="searchForm" class="searchbox"><span class="search-icon" aria-hidden="true">⌕</span><input id="query" name="q" type="search" placeholder="What are you looking for?" autocomplete="off" maxlength="300" aria-label="Search query" required><button id="searchButton" type="submit">Search ↗</button></form><div class="shortcuts"><span>Try:</span><button class="chip" type="button" data-query="how the internet works">how the internet works</button><button class="chip" type="button" data-query="independent websites">independent websites</button><button class="chip" type="button" data-query="open source projects">open source projects</button></div><p class="notice">Independent search powered by Marginalia Search.</p></section>
 <section id="resultsSection" class="results hidden" aria-live="polite"><div class="results-head"><h2 id="resultsTitle">Search results</h2><span id="resultCount" class="result-count"></span></div><div id="resultsList"></div></section>
+<section id="viewer" class="viewer hidden" aria-label="Veil page viewer">
+  <div class="viewer-bar"><button id="viewerBack" type="button">← Results</button><button id="viewerReload" type="button">↻ Reload</button><span id="viewerAddress" class="viewer-address"></span></div>
+  <iframe id="viewerFrame" title="Page opened inside Veil" referrerpolicy="no-referrer"></iframe>
+  <div class="viewer-note">Some websites block being displayed inside another page. If a page stays blank or shows an error, that site does not allow this in-app viewer.</div>
+</section>
 <section class="below" aria-label="About Veil"><article class="feature"><span class="feature-icon">◈</span><div><h3>Independent by design</h3><p>Search the web with results when available, plus backup search links.</p></div></article><article class="feature"><span class="feature-icon">⌁</span><div><h3>Quiet and focused</h3><p>A clean interface that keeps the search itself at the center.</p></div></article><article class="feature"><span class="feature-icon">⛨</span><div><h3>Privacy-minded</h3><p>Veil doesn't create an account or save your searches in this page.</p></div></article></section>
 </main>
-<footer><span>© <span id="year"></span> Veil Browser · Built for curious minds.</span><span>Independent search interface · <a href="https://github.com/khalilsabzalia-crypto/veil-browser" target="_blank" rel="noopener noreferrer">Open source</a></span></footer>
+<footer><span>© <span id="year"></span> Veil Browser · Built for curious minds.</span><span>Search index: Marginalia · <a href="https://github.com/khalilsabzalia-crypto/veil-browser" target="_blank" rel="noopener noreferrer">Open source</a></span></footer>
 <script>
 (() => {
   const API = "https://vyfeqjtoommsqsqbatyf.supabase.co/functions/v1/veil-search";
@@ -36,6 +42,25 @@ main{width:min(800px,calc(100% - 36px));margin:0 auto}.hero{text-align:center;pa
   const list = document.getElementById("resultsList");
   const title = document.getElementById("resultsTitle");
   const count = document.getElementById("resultCount");
+  const viewer = document.getElementById("viewer");
+  const viewerFrame = document.getElementById("viewerFrame");
+  const viewerAddress = document.getElementById("viewerAddress");
+  let currentViewerUrl = "";
+  function openInsideVeil(url, label) {
+    currentViewerUrl = url;
+    viewerAddress.textContent = label + " — " + url;
+    viewerFrame.src = url;
+    viewer.classList.remove("hidden");
+    viewer.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  document.getElementById("viewerBack").addEventListener("click", () => {
+    viewerFrame.src = "about:blank";
+    viewer.classList.add("hidden");
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  document.getElementById("viewerReload").addEventListener("click", () => {
+    if (currentViewerUrl) viewerFrame.src = currentViewerUrl;
+  });
   document.getElementById("year").textContent = new Date().getFullYear();
 
   function getItems(payload) {
@@ -106,7 +131,11 @@ main{width:min(800px,calc(100% - 36px));margin:0 auto}.hero{text-align:center;pa
         const h3 = document.createElement("h3");
         const link = document.createElement("a");
         link.href = safeUrl;
-        link.target = "_blank";
+        link.target = "_self";
+        link.addEventListener("click", event => {
+          event.preventDefault();
+          openInsideVeil(safeUrl, item.title);
+        });
         link.rel = "noopener noreferrer";
         link.textContent = item.title;
         h3.append(link);
@@ -147,16 +176,7 @@ main{width:min(800px,calc(100% - 36px));margin:0 auto}.hero{text-align:center;pa
     try {
       const response = await fetch(API + "?q=" + encodeURIComponent(q), { headers: { "Accept": "application/json" } });
       const payload = await response.json();
-      if (!response.ok || payload.error) {
-        const encoded = encodeURIComponent(q);
-        showResults([
-          { title: "Search “" + q + "” on DuckDuckGo", url: "https://duckduckgo.com/?q=" + encoded, content: "Veil's search provider is temporarily unavailable. Open this link to view live results." },
-          { title: "Search “" + q + "” on Bing", url: "https://www.bing.com/search?q=" + encoded, content: "Alternative live web results for your query." },
-          { title: "Search “" + q + "” on Google", url: "https://www.google.com/search?q=" + encoded, content: "Alternative live web results for your query." }
-        ]);
-        count.textContent = "Open search links";
-        return;
-      }
+      if (!response.ok || payload.error) throw new Error(payload.error || "Search request failed (" + response.status + ").");
       showResults(getItems(payload));
     } catch (error) {
       showEmpty("Search is temporarily unavailable", error && error.message ? error.message : "Could not reach the search service. Please try again.");
