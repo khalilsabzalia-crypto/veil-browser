@@ -1,0 +1,33 @@
+{
+  "name": "veil-browser",
+  "version": "1.0.0",
+  "description": "Veil standalone desktop browser",
+  "main": "main.js",
+  "author": "Veil Browser",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist:mac": "electron-builder --mac dmg zip"
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "app.veil.browser",
+    "productName": "Veil Browser",
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": ["dmg", "zip"]
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "package.json"
+    ]
+  }
+}
