@@ -1,0 +1,39 @@
+name: Build Veil for macOS
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "desktop-app/**"
+      - ".github/workflows/build-veil-mac.yml"
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: desktop-app
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js on GitHub runner
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: desktop-app/package.json
+      - name: Install dependencies
+        run: npm install
+      - name: Package Veil for Apple Silicon and Intel
+        run: npx electron-builder --mac dmg zip --x64 --arm64
+      - name: Upload macOS installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: veil-browser-macos
+          path: desktop-app/dist/*
+          if-no-files-found: error
+          retention-days: 14
