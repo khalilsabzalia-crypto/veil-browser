@@ -1,114 +1,107 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101411">
-<meta name="description" content="Veil — independent web search and browsing workspace.">
-<title>Veil Browser</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#e5c49d">
+<meta name="description" content="Veil — DuckDuckGo search and web shortcuts.">
+<title>Veil — Search the web</title>
 <style>
-:root{color-scheme:dark;--bg:#0d100f;--panel:#151a17;--panel2:#1b211d;--line:#2b342e;--text:#edf2ed;--muted:#9aa79c;--green:#b9f4a5;--greenText:#142012;--red:#ffb6a8}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}.app{min-height:100vh;display:flex;flex-direction:column}.top{height:60px;display:flex;align-items:center;gap:14px;padding:0 22px;border-bottom:1px solid var(--line);background:#111512}.brand{display:flex;align-items:center;gap:9px;font-size:18px;font-weight:800;letter-spacing:-.05em;white-space:nowrap}.logo{width:28px;height:28px;border-radius:9px;background:var(--green);color:var(--greenText);display:grid;place-items:center;font-weight:900}.topnote{margin-left:auto;color:var(--muted);font-size:12px}.toolbar{display:flex;gap:7px;align-items:center;padding:12px 18px;background:#121713;border-bottom:1px solid var(--line)}.toolbtn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;min-width:36px;height:36px;padding:0 10px}.toolbtn:hover{border-color:#61765f}.address{display:flex;align-items:center;gap:8px;flex:1;min-width:0;background:#0c100d;border:1px solid #354139;border-radius:11px;padding:0 12px;height:40px}.address input{width:100%;min-width:0;background:transparent;border:0;outline:0;color:var(--text)}.go{border:0;border-radius:9px;background:var(--green);color:var(--greenText);font-weight:800;padding:10px 17px}.layout{display:grid;grid-template-columns:230px minmax(0,1fr);flex:1;min-height:calc(100vh - 117px)}aside{padding:18px 13px;border-right:1px solid var(--line);background:#101411}.side-label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#718075;padding:7px 10px}.navbtn{display:flex;gap:10px;align-items:center;width:100%;padding:10px;border:0;border-radius:9px;background:transparent;color:#c6d0c7;text-align:left;margin:2px 0}.navbtn.active,.navbtn:hover{background:#202920;color:var(--green)}.enginebtn{display:flex;align-items:center;gap:9px;width:100%;padding:9px 10px;margin:3px 0;border:1px solid transparent;border-radius:9px;background:transparent;color:#bac5bb;text-align:left;font-size:12px}.enginebtn:hover{background:#202920;color:var(--text)}.enginebtn.active{background:#263425;border-color:#3e5a3a;color:var(--green)}.engine-dot{width:7px;height:7px;border-radius:50%;background:#6c7b6e;flex:none}.enginebtn.active .engine-dot{background:var(--green);box-shadow:0 0 10px #b9f4a555}.side-info{margin:20px 7px 0;padding:12px;border:1px solid var(--line);border-radius:11px;color:var(--muted);font-size:11px}.main{min-width:0;padding:clamp(20px,4vw,42px);max-width:1100px;width:100%;margin:0 auto}.welcome{padding:20px 0 25px}.eyebrow{color:var(--green);font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}.welcome h1{font-size:clamp(32px,5vw,54px);line-height:1.05;letter-spacing:-.065em;margin:10px 0}.welcome p{margin:0;color:var(--muted);max-width:560px}.searchform{display:flex;gap:9px;max-width:780px}.searchform input{flex:1;min-width:0;border:1px solid #364239;background:#121713;border-radius:12px;padding:14px 16px;color:var(--text);outline:none}.searchform input:focus{border-color:#9fd78d;box-shadow:0 0 0 3px #b9f4a51c}.searchform button{border:0;border-radius:11px;background:var(--green);color:var(--greenText);font-weight:850;padding:0 19px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:99px;padding:7px 11px;font-size:12px}.chip:hover{color:var(--green)}.results-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:24px 0 12px;color:var(--muted);font-size:12px}.result{padding:18px 0;border-bottom:1px solid #222a24}.result-url{font-size:11px;color:#a7d99a;overflow-wrap:anywhere}.result h2{font-size:18px;letter-spacing:-.025em;margin:5px 0}.result h2 button{border:0;background:none;color:var(--green);padding:0;text-align:left;font-weight:700}.result h2 button:hover{text-decoration:underline}.result p{margin:0;color:#aeb9b0;line-height:1.65}.empty{margin-top:20px;border:1px solid var(--line);border-radius:12px;padding:18px;color:var(--muted);background:#111612}.empty strong{display:block;color:var(--text);margin-bottom:4px}.viewer{margin-top:22px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#111}.viewerhead{display:flex;gap:8px;align-items:center;padding:9px;background:#191f1a;border-bottom:1px solid var(--line)}.viewerhead span{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:12px}.viewer iframe{display:block;width:100%;height:min(68vh,760px);border:0;background:white}.viewnote{font-size:11px;color:var(--muted);padding:10px 12px;background:#141915}.hidden{display:none!important}.loading{padding:28px 0;color:var(--muted)}.status{font-size:12px;color:var(--muted);padding-top:12px}.status.error{color:var(--red)}.footer{padding:16px 22px;border-top:1px solid var(--line);font-size:11px;color:#718075;display:flex;justify-content:space-between;gap:12px}.footer a{color:#a6c99b}@media(max-width:700px){.top{padding:0 14px}.topnote{display:none}.toolbar{padding:9px}.layout{grid-template-columns:1fr}aside{display:none}.main{padding:18px}.welcome{padding-top:10px}.searchform button{padding:0 13px}.footer{flex-direction:column}.viewer iframe{height:65vh}} 
+:root{color-scheme:light;--ink:#39291d;--muted:#806e5e;--line:#e7d7c7;--panel:#fffdfb;--side:#f8f2ec;--accent:#bf783f}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}body{min-height:100vh;background:#f5eee5}button,input{font:inherit}button{cursor:pointer;color:inherit}
+#app{min-height:100vh;display:flex;flex-direction:column}
+#topbar{height:54px;display:flex;align-items:center;gap:10px;padding:0 16px;background:#faf6f1;border-bottom:1px solid var(--line)}
+#brand{width:91px;flex:none;display:flex;align-items:center;gap:9px;font-weight:800;font-size:16px}.mark{display:inline-block;width:19px;height:11px;border:3px solid white;border-radius:50%;background:#e2bd94;box-shadow:0 0 0 1px #e2bd94}
+.tool{height:32px;width:32px;border:0;border-radius:8px;background:transparent;color:#826f5d;font-size:18px;display:grid;place-items:center}.tool:hover{background:#eee2d6}
+#addressForm{height:35px;display:flex;align-items:center;gap:9px;flex:1;min-width:0;padding:0 12px;background:#fffdfa;border:1px solid #e2d2c3;border-radius:11px}#address{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font-size:13px}#address::placeholder{color:#8a7765}
+#go{height:34px;padding:0 15px;border:1px solid var(--accent);border-radius:10px;background:#fffdfa;font-weight:700}#go:hover{background:#fff3e8}
+#layout{display:flex;flex:1;min-height:calc(100vh - 54px)}
+#sidebar{width:221px;flex:none;background:var(--side);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:12px 7px 8px}
+.sidebtn{height:39px;display:flex;align-items:center;gap:12px;padding:0 12px;border:0;border-radius:9px;background:transparent;text-align:left;color:#4c392a}.sidebtn:hover,.sidebtn.active{background:#ebdfd3}.sideicon{width:17px;text-align:center;font-size:17px}.side-label{padding:13px 11px 6px;color:#a18b77;font-size:10px;text-transform:uppercase;letter-spacing:1.3px}
+#tabs{display:flex;flex-direction:column;gap:4px;padding:0 1px}.tab{height:42px;display:flex;align-items:center;gap:9px;padding:0 10px;border:1px solid transparent;border-radius:10px;background:transparent;color:#685441;text-align:left;min-width:0}.tab.active{background:#e8dace;border-color:#dfd0c1;box-shadow:0 2px 4px #65482c13}.tab span:nth-child(2){overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}.tab button{border:0;background:transparent;color:#907b67;font-size:16px;padding:0}
+#sidebottom{margin-top:auto;border-top:1px solid var(--line);padding-top:9px;display:flex;flex-direction:column;gap:3px}
+#main{position:relative;flex:1;min-width:0;min-height:calc(100vh - 54px);background:radial-gradient(ellipse at 49% 44%,#f3dfc2 0%,#e4c29b 51%,#d8b38a 100%);overflow:hidden}
+#main:before{content:"";position:absolute;inset:-40px;pointer-events:none;background:radial-gradient(ellipse at 23% 24%,#fff4e1a8,transparent 35%),radial-gradient(ellipse at 77% 65%,#c99b6a55,transparent 36%);filter:blur(20px)}
+#home{position:relative;z-index:1;min-height:calc(100vh - 54px);max-width:1100px;margin:auto;padding:27px 25px 24px;display:flex;flex-direction:column;align-items:center}
+#topAction{align-self:flex-end;border:1px solid #ead7c3;border-radius:16px;background:#fffaf5;padding:12px 16px;font-weight:700;box-shadow:0 5px 20px #65401d12}
+#hero{width:100%;margin:auto 0;text-align:center;padding:32px 0 52px}
+#wordmark{display:flex;justify-content:center;align-items:center;gap:24px;font-size:clamp(58px,7.5vw,90px);font-weight:550;letter-spacing:-5px;line-height:1;margin-bottom:48px;color:#382719}#wordmark .mark{width:61px;height:30px;border:9px solid white;background:transparent;box-shadow:none}
+#searchForm{height:56px;width:min(100%,660px);margin:auto;display:flex;align-items:center;gap:12px;padding:0 18px;background:#fffdfb;border:1px solid #f0dfcf;border-radius:40px;box-shadow:0 7px 24px #6e4c2a18}#searchInput{flex:1;min-width:0;border:0;outline:0;background:transparent;color:#493628;font-size:14px}#searchInput::placeholder{color:#806c5a}#searchForm button{border:0;background:transparent;font-size:22px;padding:3px 6px}
+#shortcuts{max-width:690px;display:flex;flex-wrap:wrap;justify-content:center;gap:27px 20px;margin:39px auto 0}
+.shortcut{width:88px;display:flex;flex-direction:column;align-items:center;gap:9px;padding:0;border:0;background:transparent;font-size:12px;color:#4a3728}.bubble{width:45px;height:45px;border-radius:50%;display:grid;place-items:center;background:#fffdfb;box-shadow:0 5px 15px #5e3b1c1c;font-size:21px;transition:transform .15s}.shortcut:hover .bubble{transform:translateY(-3px)}
+#footer{position:relative;z-index:1;width:100%;margin-top:auto;display:flex;align-items:center;justify-content:space-between;color:#674b32;font-size:12px}#ready{border:1px solid #ead8c5;border-radius:24px;background:#fffaf5;padding:10px 15px}#ready:before{content:"●";font-size:10px;color:#c9824a;margin-right:8px}#customize{border:1px solid #ead8c5;border-radius:13px;background:#fffaf5;padding:12px 16px;font-weight:650}
+#resultsPage{display:none;position:relative;z-index:1;min-height:calc(100vh - 54px);background:#fff;overflow:auto}#resultsBar{position:sticky;top:0;background:#fff;padding:12px 22px 10px;border-bottom:1px solid #eee;z-index:2}#resultsSearch{display:flex;align-items:center;gap:10px;border:1px solid #ddd;border-radius:28px;height:44px;padding:0 15px;max-width:900px}#resultsQuery{flex:1;min-width:0;border:0;outline:0;background:transparent}#resultsSearch button{border:0;background:transparent;color:#8b5a33;font-size:19px}#resultsBody{max-width:760px;padding:22px 28px}#resultsLabel{color:#6e756e;font-size:12px;margin-bottom:17px}.result{padding:0 0 22px;margin-bottom:20px;border-bottom:1px solid #eee}.result .url{font-size:12px;color:#4e6b4b;margin-bottom:4px;overflow-wrap:anywhere}.result h2{margin:0 0 5px;font-size:20px;font-weight:500}.result h2 a{color:#1a0dab;text-decoration:none}.result h2 a:hover{text-decoration:underline}.result p{margin:0;color:#4b4b4b;line-height:1.55;font-size:14px}.result .external{display:inline-block;margin-top:7px;color:#555;font-size:12px}.resultsHint{color:#6c6c6c;font-size:13px;padding:15px 0}
+@media(max-width:720px){#sidebar{width:58px;padding:9px 4px}#sidebar .sidebtn{justify-content:center;padding:0;font-size:0}#sidebar .sidebtn .sideicon{font-size:18px}#sidebar .side-label,#tabs{display:none}#topbar{gap:4px;padding:0 6px}#brand{width:26px;font-size:0;gap:0}#wordmark{font-size:58px;gap:15px;margin-bottom:32px}#wordmark .mark{width:43px;height:23px;border-width:7px}#home{padding:17px 12px}#shortcuts{gap:20px 7px;margin-top:28px}.shortcut{width:65px}#resultsBody{padding:18px 16px}#resultsBar{padding:10px}}
 </style>
 </head>
 <body>
-<div class="app">
-<header class="top"><div class="brand"><span class="logo">V</span> veil<span style="color:var(--green)">.</span></div><span class="topnote">Independent web search · Browser workspace</span></header>
-<div class="toolbar">
-<button class="toolbtn" id="back" title="Back to search" aria-label="Back">←</button>
-<button class="toolbtn" id="reload" title="Reload page" aria-label="Reload">↻</button>
-<form id="addressForm" class="address"><span style="color:var(--green)">⌕</span><input id="address" autocomplete="url" placeholder="Search Veil or enter a website address" aria-label="Search or website address"></form>
-<button class="go" id="go" type="submit" form="addressForm">Go ↗</button>
+<div id="app">
+<header id="topbar">
+<div id="brand"><span class="mark"></span>Veil</div>
+<button class="tool" id="back" title="Back to start" aria-label="Back">‹</button>
+<button class="tool" id="forward" title="Forward" aria-label="Forward">›</button>
+<button class="tool" id="reload" title="Reload" aria-label="Reload">↻</button>
+<button class="tool" id="homeButton" title="New tab" aria-label="Home">⌂</button>
+<form id="addressForm"><span style="color:#8b7865">◎</span><input id="address" placeholder="Search DuckDuckGo or enter a website address" autocomplete="off"><button class="tool" type="submit" aria-label="Go">↗</button></form>
+<button id="go" form="addressForm">Go ↗</button>
+</header>
+<div id="layout">
+<aside id="sidebar">
+<button class="sidebtn active" id="newTab"><span class="sideicon">＋</span>New tab</button>
+<div class="side-label">Tabs</div><div id="tabs"></div>
+<div id="sidebottom">
+<button class="sidebtn" data-url="https://duckduckgo.com/"><span class="sideicon">✧</span>AI / Search</button>
+<button class="sidebtn" data-url="https://www.crazygames.com/"><span class="sideicon">♙</span>Games</button>
+<button class="sidebtn" data-url="https://www.youtube.com/"><span class="sideicon">▶</span>YouTube</button>
+<button class="sidebtn" id="settings"><span class="sideicon">⚙</span>Settings</button>
 </div>
-<div class="layout">
-<aside>
-<div class="side-label">Workspace</div>
-<button class="navbtn active" id="navSearch">⌕ <span>Search</span></button>
-<button class="navbtn" id="navHome">⌂ <span>Home</span></button>
-<div class="side-label" style="margin-top:22px">Search engines</div>
-<button class="enginebtn active" data-engine="wikipedia"><span class="engine-dot"></span> Wikipedia <span style="margin-left:auto;color:#78867b">↗</span></button>
-<button class="enginebtn" data-engine="hackernews"><span class="engine-dot"></span> Hacker News</button>
-<button class="enginebtn" data-engine="github"><span class="engine-dot"></span> GitHub projects</button>
-<button class="enginebtn" data-engine="archive"><span class="engine-dot"></span> Internet Archive</button>
-<button class="enginebtn" data-engine="books"><span class="engine-dot"></span> Open Library</button>
-<button class="enginebtn" data-engine="marginalia"><span class="engine-dot"></span> Marginalia</button>
-<div class="side-label" style="margin-top:20px">Quick searches</div>
-<button class="navbtn quick" data-q="independent websites">◇ <span>Independent web</span></button>
-<button class="navbtn quick" data-q="open source software">⌘ <span>Open source</span></button>
-<button class="navbtn quick" data-q="Minecraft building guides">▦ <span>Minecraft guides</span></button>
-<div class="side-info">Choose an engine to search its own index. Wikipedia, code projects, community discussions, books and archived media have different coverage.</div>
 </aside>
-<main class="main">
+<main id="main">
 <section id="home">
-<div class="welcome"><div class="eyebrow">A quieter web</div><h1>Find the other<br>side of the internet.</h1><p>Pick a search engine, search its index, and open supported pages in Veil's viewing area.</p></div>
-<form id="searchForm" class="searchform"><input id="query" maxlength="300" placeholder="Search this engine…" aria-label="Search the independent web" required><button type="submit">Search ↗</button></form>
-<div class="chips"><button class="chip" data-q="personal websites" type="button">Personal websites</button><button class="chip" data-q="independent game developers" type="button">Indie game devs</button><button class="chip" data-q="open source projects" type="button">Open source</button><button class="chip" data-q="Minecraft guides" type="button">Minecraft</button></div>
-<div id="status" class="status" role="status">Engine: Wikipedia</div>
+<button id="topAction" data-url="https://discord.com/">▣ &nbsp; Join our Discord &nbsp; ↗</button>
+<div id="hero">
+<div id="wordmark"><span class="mark"></span><span>Veil</span></div>
+<form id="searchForm"><span style="font-size:21px">⌕</span><input id="searchInput" placeholder="Search DuckDuckGo" autocomplete="off" required><button type="submit" aria-label="Search">↗</button></form>
+<div id="shortcuts">
+<button class="shortcut" data-url="https://www.crazygames.com/"><span class="bubble">♙</span><span>Games</span></button>
+<button class="shortcut" data-url="https://duckduckgo.com/"><span class="bubble">✧</span><span>AI</span></button>
+<button class="shortcut" data-url="https://www.youtube.com/"><span class="bubble" style="color:#e52b24">▶</span><span>YouTube</span></button>
+<button class="shortcut" data-url="https://www.instagram.com/"><span class="bubble" style="color:#c13e8e">◎</span><span>Instagram</span></button>
+<button class="shortcut" data-url="https://www.tiktok.com/"><span class="bubble">♪</span><span>TikTok</span></button>
+<button class="shortcut" data-url="https://discord.com/"><span class="bubble" style="color:#6573e9">☻</span><span>Discord</span></button>
+<button class="shortcut" data-url="https://open.spotify.com/"><span class="bubble" style="color:#22a65a">◉</span><span>Spotify</span></button>
+<button class="shortcut" data-url="https://www.twitch.tv/"><span class="bubble" style="color:#8d55dc">▣</span><span>Twitch</span></button>
+<button class="shortcut" data-url="https://www.roblox.com/"><span class="bubble">◇</span><span>Roblox / nowgg…</span></button>
+<button class="shortcut" id="addShortcut"><span class="bubble">＋</span><span>Add shortcut</span></button>
+</div>
+</div>
+<footer id="footer"><span id="ready">DuckDuckGo search ready</span><button id="customize">♧ &nbsp; Customize</button></footer>
 </section>
-<section id="resultsSection" class="hidden" aria-live="polite"><div class="results-head"><span id="resultsTitle">Search results</span><span id="resultCount"></span></div><div id="results"></div></section>
-<section id="viewer" class="viewer hidden"><div class="viewerhead"><button class="toolbtn" id="closeViewer" type="button">← Results</button><span id="viewerUrl"></span><button class="toolbtn" id="openExternal" type="button" title="Open website separately">↗</button></div><iframe id="frame" title="Page viewer" referrerpolicy="no-referrer"></iframe><div class="viewnote">Some websites block embedding in other sites. If a page is blocked here, Veil cannot override that site's security rules; use ↗ to open it separately.</div></section>
+<section id="resultsPage">
+<div id="resultsBar"><form id="resultsSearch"><span>⌕</span><input id="resultsQuery" placeholder="Search DuckDuckGo" autocomplete="off"><button type="submit" aria-label="Search">↗</button></form></div>
+<div id="resultsBody"><div id="resultsLabel">Search with DuckDuckGo</div><div id="resultsList"></div><p class="resultsHint">Search results open directly on DuckDuckGo. Veil's web page cannot embed every website because many sites block iframe embedding.</p></div>
+</section>
 </main>
 </div>
-<footer class="footer"><span>Veil Browser · Experimental</span><span>Multiple independent APIs · No search API key required</span></footer>
 </div>
 <script>
-(() => {
- const API="https://vyfeqjtoommsqsqbatyf.supabase.co/functions/v1/veil-search";
- const $=id=>document.getElementById(id);
- const searchForm=$("searchForm"), queryInput=$("query"), address=$("address"), resultsSection=$("resultsSection"), results=$("results"), status=$("status"), viewer=$("viewer"), frame=$("frame"), viewerUrl=$("viewerUrl");
- let currentUrl="", historyStack=[], historyIndex=-1, selectedEngine="wikipedia", lastQuery="";
- function setStatus(message,error=false){status.textContent=message;status.classList.toggle("error",error);}
- function safeUrl(raw){try{const u=new URL(raw);return ["https:","http:"].includes(u.protocol)?u.href:""}catch{return ""}}
- function openPage(url,title){
-   const safe=safeUrl(url); if(!safe)return;
-   currentUrl=safe;historyStack=historyStack.slice(0,historyIndex+1);historyStack.push({url:safe,title:title||safe});historyIndex++;
-   frame.src=safe;viewerUrl.textContent=title?title+" · "+safe:safe;viewer.classList.remove("hidden");viewer.scrollIntoView({behavior:"smooth",block:"start"});
- }
- function renderItems(items){
-   results.replaceChildren();
-   if(!items.length){const box=document.createElement("div");box.className="empty";box.innerHTML="<strong>No results returned</strong>Try a different query, or the search API may be rate-limited.";results.append(box);$("resultCount").textContent="0 results";return;}
-   $("resultCount").textContent=items.length+" results";
-   items.forEach(item=>{
-     const url=safeUrl(item.url||"");if(!url)return;
-     const article=document.createElement("article");article.className="result";
-     const domain=document.createElement("div");domain.className="result-url";try{domain.textContent=new URL(url).hostname}catch{domain.textContent=url}
-     const h=document.createElement("h2"), link=document.createElement("button");link.type="button";link.textContent=item.title||url;link.addEventListener("click",()=>openPage(url,item.title));h.append(link);
-     const p=document.createElement("p");p.textContent=item.content||item.description||"";
-     article.append(domain,h,p);results.append(article);
-   });
- }
- async function search(q){
-   q=(q||"").trim();if(!q)return; if(q.length>300)q=q.slice(0,300);lastQuery=q;
-   queryInput.value=q;address.value=q;resultsSection.classList.remove("hidden");viewer.classList.add("hidden");$("resultsTitle").textContent="Results for “"+q+"”";$("resultCount").textContent="";
-   results.replaceChildren();const loading=document.createElement("div");loading.className="loading";loading.textContent="Searching "+engineName(selectedEngine)+"…";results.append(loading);setStatus("Searching "+engineName(selectedEngine)+"…");
-   try{
-     const response=await fetch(API+"?engine="+encodeURIComponent(selectedEngine)+"&q="+encodeURIComponent(q),{headers:{Accept:"application/json"}});
-     const payload=await response.json();
-     if(!response.ok||payload.error)throw new Error(payload.error||"Search request failed (HTTP "+response.status+").");
-     renderItems(Array.isArray(payload.results)?payload.results:[]);
-     setStatus("Search complete · "+(payload.provider||engineName(selectedEngine)));
-   }catch(e){
-     results.replaceChildren();const box=document.createElement("div");box.className="empty";const strong=document.createElement("strong");strong.textContent=engineName(selectedEngine)+" is temporarily unavailable";const p=document.createElement("p");p.textContent=(e&&e.message?e.message:"The search service could not be reached.")+" Choose another engine in the sidebar to continue.";box.append(strong,p);results.append(box);$("resultCount").textContent="";setStatus("Search API error",true);
-   }
- }
- function engineName(id){return ({wikipedia:"Wikipedia",hackernews:"Hacker News",github:"GitHub Projects",archive:"Internet Archive",books:"Open Library",marginalia:"Marginalia"})[id]||"Search engine";}
- document.querySelectorAll("[data-engine]").forEach(button=>button.addEventListener("click",()=>{
-   selectedEngine=button.dataset.engine;
-   document.querySelectorAll("[data-engine]").forEach(b=>b.classList.toggle("active",b===button));
-   setStatus("Selected engine · "+engineName(selectedEngine));
-   if(lastQuery)search(lastQuery);
- }));
- searchForm.addEventListener("submit",e=>{e.preventDefault();search(queryInput.value)});
- $("addressForm").addEventListener("submit",e=>{e.preventDefault();const raw=address.value.trim();if(!raw)return;if(/^https?:\/\//i.test(raw)||/^[\w-]+(\.[\w-]+)+/.test(raw)){const url=safeUrl(/^https?:\/\//i.test(raw)?raw:"https://"+raw);if(url)openPage(url,url);else search(raw)}else search(raw)});
- document.querySelectorAll("[data-q]").forEach(b=>b.addEventListener("click",()=>search(b.dataset.q)));
- $("navHome").addEventListener("click",()=>{viewer.classList.add("hidden");resultsSection.classList.add("hidden");$("home").scrollIntoView({behavior:"smooth"});queryInput.focus()});
- $("navSearch").addEventListener("click",()=>{queryInput.focus();window.scrollTo({top:0,behavior:"smooth"})});
- $("closeViewer").addEventListener("click",()=>{viewer.classList.add("hidden");frame.src="about:blank";resultsSection.scrollIntoView({behavior:"smooth",block:"start"})});
- $("reload").addEventListener("click",()=>{if(currentUrl)frame.src=currentUrl;else if(queryInput.value)search(queryInput.value)});
- $("back").addEventListener("click",()=>{if(viewerIndexBack())return;viewer.classList.add("hidden");frame.src="about:blank";});
- function viewerIndexBack(){if(historyIndex>0){historyIndex--;const item=historyStack[historyIndex];currentUrl=item.url;frame.src=item.url;viewerUrl.textContent=item.title+" · "+item.url;viewer.classList.remove("hidden");return true}return false}
- $("openExternal").addEventListener("click",()=>{if(currentUrl)window.open(currentUrl,"_blank","noopener,noreferrer")});
- const params=new URLSearchParams(location.search);if(params.get("q"))search(params.get("q"));
+(()=> {
+const $=id=>document.getElementById(id);
+const tabs=[];let activeId=0,nextId=1,history=[];
+function queryUrl(q){return 'https://duckduckgo.com/?q='+encodeURIComponent(String(q||'').trim())}
+function resolve(v){v=String(v||'').trim();if(!v)return '';if(/^https?:\/\//i.test(v))return v;if(/^[\w-]+(\.[\w-]+)+(\/[^\s]*)?$/i.test(v)&&!v.includes(' '))return 'https://'+v;return queryUrl(v)}
+function showResults(q){q=String(q||'').trim();if(!q)return;const url=queryUrl(q);history.push(url);window.location.href=url}
+function goTo(value){const url=resolve(value);if(url)window.location.href=url}
+function renderTabs(){const root=$('tabs');root.replaceChildren();tabs.forEach(t=>{const b=document.createElement('button');b.className='tab'+(t.id===activeId?' active':'');const icon=document.createElement('span');icon.textContent='◎';const name=document.createElement('span');name.textContent=t.title;const close=document.createElement('button');close.type='button';close.textContent='×';close.title='Close tab';b.append(icon,name,close);b.onclick=()=>{activeId=t.id;renderTabs();$('ready').textContent='Selected '+t.title};close.onclick=e=>{e.stopPropagation();const i=tabs.findIndex(x=>x.id===t.id);tabs.splice(i,1);if(!tabs.length)makeTab();else{activeId=tabs[Math.max(0,i-1)].id;renderTabs()}};root.append(b)})}
+function makeTab(){const t={id:nextId++,title:'New tab'};tabs.push(t);activeId=t.id;renderTabs();$('home').style.display='flex';$('resultsPage').style.display='none';$('searchInput').focus();$('ready').textContent='DuckDuckGo search ready'}
+$('searchForm').addEventListener('submit',e=>{e.preventDefault();showResults($('searchInput').value)});
+$('resultsSearch').addEventListener('submit',e=>{e.preventDefault();showResults($('resultsQuery').value)});
+$('addressForm').addEventListener('submit',e=>{e.preventDefault();goTo($('address').value)});
+$('newTab').onclick=makeTab;$('homeButton').onclick=makeTab;$('back').onclick=()=>history.length>1?window.history.back():makeTab();$('forward').onclick=()=>window.history.forward();$('reload').onclick=()=>window.location.reload();
+document.querySelectorAll('[data-url]').forEach(b=>b.addEventListener('click',()=>goTo(b.dataset.url)));
+$('addShortcut').onclick=()=>{const url=prompt('Enter a website address or domain:');if(url)goTo(url)};
+$('settings').onclick=()=>{const color=prompt('Choose a new-tab background color (hex, e.g. #e6c69f):','#e6c69f');if(color&&/^#[0-9a-f]{6}$/i.test(color))$('main').style.background='radial-gradient(ellipse at 49% 44%,#f3dfc2 0%,'+color+' 51%,#d8b38a 100%)'};
+$('address').addEventListener('focus',()=>{$('address').select()});
+makeTab();
 })();
 </script>
-</body></html>
+</body>
+</html>
